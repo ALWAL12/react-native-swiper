@@ -186,7 +186,7 @@ module.exports = React.createClass({
       }
     }
     return -1;
-  }
+  },
 
   componentDidMount() {
     this.autoplay()
