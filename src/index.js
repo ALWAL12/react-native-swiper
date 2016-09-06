@@ -172,9 +172,21 @@ module.exports = React.createClass({
    */
   autoplayTimer: null,
 
-  componentWillReceiveProps(props) {
-    this.setState(this.initState(props))
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.initState(nextProps));
+
+    const currentChild = this.props.children[this.state.index];
+    this.setState({ index: this.findIndexOfNodeIn(currentChild, nextProps.children) });
   },
+
+  findIndexOfNodeIn(node, haystack) {
+    for (let i = 0; i < haystack.length; ++i) {
+      if (node.key === haystack[i].key) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
   componentDidMount() {
     this.autoplay()
